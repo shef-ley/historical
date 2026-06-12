@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>History Timeline — Lives in Context</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Lives in Context</h1>
+    <p>Historical figures — even ones taught in separate units — often lived at the same time. Hover to see overlaps. Click to explore.</p>
+  </div>
+</header>
+
+<div class="controls">
+  <span class="control-label">Zoom:</span>
+  <div class="control-group">
+    <button id="zoom-in">+ Zoom in</button>
+    <button id="zoom-out">− Zoom out</button>
+    <button id="reset-view">Reset view</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <span class="control-label">Filter:</span>
+  <div class="control-group" id="filter-buttons">
+    <button class="filter-btn active" data-region="all">All</button>
+    <!-- injected by JS -->
+  </div>
+</div>
+
+<div class="canvas-wrapper">
+  <canvas id="timeline-canvas"></canvas>
+</div>
+
+<div class="hint-bar">
+  Scroll to zoom · Click + drag to pan · Hover a bar to see overlaps · Click to open detail panel
+</div>
+
+<!-- Detail panel backdrop -->
+<div id="detail-backdrop"></div>
+
+<!-- Detail panel -->
+<div id="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-name">
+  <div id="detail-header">
+    <div id="detail-name"></div>
+    <div id="detail-lifespan"></div>
+    <div id="detail-summary"></div>
+    <div id="detail-header-controls">
+      <a id="detail-wiki" href="#" target="_blank" rel="noopener">Wikipedia ↗</a>
+      <button id="detail-close" aria-label="Close panel">✕</button>
+    </div>
+  </div>
+
+  <div id="detail-body">
+    <div id="detail-contemporaries"></div>
+    <div id="detail-events-section">
+      <h4>Key life events</h4>
+      <div id="detail-events"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Data -->
+<script src="data/people.js"></script>
+<script>
+  // Keep a master copy for filtering
+  const ALL_PEOPLE = [...PEOPLE];
+</script>
+
+<!-- App -->
+<script src="js/timeline.js"></script>
+<script src="js/detail.js"></script>
+
+<script>
+  // Build filter buttons from regions
+  const filterContainer = document.getElementById('filter-buttons');
+  REGION_ORDER.forEach(region => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.dataset.region = region;
+    btn.textContent = region;
+    filterContainer.appendChild(btn);
+  });
+
+  // Boot
+  document.addEventListener('DOMContentLoaded', initTimeline);
+
+  // formatYear needed in detail.js too
+  function formatYear(y) {
+    if (y < 0) return Math.abs(Math.round(y)) + ' BCE';
+    return Math.round(y) + ' CE';
+  }
+</script>
+
+</body>
+</html>
