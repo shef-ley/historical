@@ -86,16 +86,3 @@ Add an entry to `data/people.js`:
 | 19th Century | 1800–1900 |
 | Early 20th Century | 1850–1970 |
 
-## Deploying to GitHub Pages
-
-1. Push to GitHub
-2. Settings → Pages → Source: `main` branch, `/ (root)` folder
-3. Done — no build step needed
-
-## Roadmap ideas
-
-- [ ] More events files (Newton, Lincoln, Voltaire, Caesar, …)
-- [ ] Animated zoom into an era on filter click
-- [ ] Overlap matrix view (who overlapped with whom, by how many years)
-- [ ] "Did they meet?" mode — highlight plausible connections
-- [ ] Second-level detail (click an event → see context)
